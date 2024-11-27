@@ -1,17 +1,38 @@
 using Xunit;
-using AAAAmESTtKACIOVA;
-namespace TestProject1; 
-public class AuthorizationTests
+using AAAAmESTtKACIOVA;  // ”бедитесь, что это пространство имен совпадает
+
+namespace TestProject1
 {
-    [Fact]
-    public void GetUser_WithValidCredentials_ReturnsTrue()
+    public class UserAuthTests
     {
-        var form = new Form1();
-        string testLogin = "testUser"; 
-        string testPassword = "testPass";
-        
-        bool result = form.CheckUserCredentials(testLogin, testPassword);
-       
-        Assert.True(result);
+        [Fact]
+        public void CheckUserCredentials_ValidUser_ReturnsTrue()
+        {
+            // Arrange  
+            var auth = new UserAuth();
+            string validLogin = "testUser";
+            string validPassword = "testPassword";
+
+            // Act  
+            bool result = auth.CheckUserCredentials(validLogin, validPassword);
+
+            // Assert  
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void CheckUserCredentials_InvalidUser_ReturnsFalse()
+        {
+            // Arrange  
+            var auth = new UserAuth();
+            string invalidLogin = "wrongUser";
+            string invalidPassword = "wrongPassword";
+
+            // Act  
+            bool result = auth.CheckUserCredentials(invalidLogin, invalidPassword);
+
+            // Assert  
+            Assert.False(result);
+        }
     }
 }
