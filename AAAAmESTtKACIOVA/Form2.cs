@@ -17,8 +17,9 @@ namespace AAAAmESTtKACIOVA
         public Form2()
         {
             InitializeComponent();
+            
         }
-
+        public bool UserId {  get; set; }   
         private void button1_Click(object sender, EventArgs e)
         {
             Form1 form1 = new Form1();
@@ -38,6 +39,15 @@ namespace AAAAmESTtKACIOVA
             string connString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = mEST;";
             SqlConnection sqlConnection = new SqlConnection(connString);
 
+            if (UserId == true)
+            {
+                toForm3Button.Visible = true;
+            }
+            else
+            {
+                toForm3Button.Visible = false;
+            }
+
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("SELECT * FROM goodss ORDER BY Name", sqlConnection);
             
@@ -51,7 +61,11 @@ namespace AAAAmESTtKACIOVA
             }
             listBox1.DataSource = listgoodss;
         }
-
+       
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            
+        }
         private void button3_Click(object sender, EventArgs e)
         {
             List<string> listgoodss = new List<string>();
@@ -70,6 +84,12 @@ namespace AAAAmESTtKACIOVA
                 listgoodss.Add($"{name} - {price:C}");
             }
             listBox1.DataSource = listgoodss;
+        }
+
+        private void toForm3Button_Click(object sender, EventArgs e)
+        {
+            Form3 form3 = new Form3();
+            form3.Show();
         }
     }
 }

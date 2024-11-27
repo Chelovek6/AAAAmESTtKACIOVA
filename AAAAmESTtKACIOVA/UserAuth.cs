@@ -1,28 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
-namespace AAAAmESTtKACIOVA
+public class UserAuth
 {
-        public class UserAuth
+    public bool CheckUserCredentials(string login, string password)
+    {
+        try
         {
-            public bool CheckUserCredentials(string login, string password)
+            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
             {
-                string connString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = mEST;"; using (SqlConnection sqlConnection = new SqlConnection(connString))
+                string connString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = mEST; ";
+                SqlConnection sqlConnection = new SqlConnection(connString);
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand($"select * from [users] where login = '{login}' and pass = '{password}'", sqlConnection);
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                if (sqlDataReader.Read())
                 {
-                    sqlConnection.Open();
-                    string query = "SELECT COUNT(*) FROM [users] WHERE login = @login AND pass = @password"; using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
-                    {
-                        sqlCommand.Parameters.AddWithValue("@login", login);
-                        sqlCommand.Parameters.AddWithValue("@password", password);
-                        int count = (int)sqlCommand.ExecuteScalar(); return count > 0;
-                        return true;
-                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
+            return false;
+        }
+        catch
+        {
+            return false;
         }
     }
-
+}

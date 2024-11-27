@@ -32,6 +32,7 @@
             this.goodsButton = new System.Windows.Forms.Button();
             this.sortButton = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.toForm3Button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // backButton
@@ -75,11 +76,24 @@
             this.listBox1.TabIndex = 4;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
+            // toForm3Button
+            // 
+            this.toForm3Button.Location = new System.Drawing.Point(348, 414);
+            this.toForm3Button.Name = "toForm3Button";
+            this.toForm3Button.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toForm3Button.Size = new System.Drawing.Size(129, 23);
+            this.toForm3Button.TabIndex = 5;
+            this.toForm3Button.Text = "Добавить товар";
+            this.toForm3Button.UseVisualStyleBackColor = true;
+            this.toForm3Button.Visible = false;
+            this.toForm3Button.Click += new System.EventHandler(this.toForm3Button_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.toForm3Button);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.sortButton);
             this.Controls.Add(this.goodsButton);
@@ -95,5 +109,6 @@
         private System.Windows.Forms.Button goodsButton;
         private System.Windows.Forms.Button sortButton;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button toForm3Button;
     }
 }

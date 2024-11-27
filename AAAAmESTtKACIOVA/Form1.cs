@@ -20,7 +20,7 @@ namespace AAAAmESTtKACIOVA
         {
             InitializeComponent();
         }
-        
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // 
@@ -44,7 +44,9 @@ namespace AAAAmESTtKACIOVA
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
                     if (sqlDataReader.Read())
                     {
+                       
                         Form2 form2 = new Form2();
+                        form2.UserId = true;
                         form2.Show();
                         this.Hide();
 
@@ -70,12 +72,12 @@ namespace AAAAmESTtKACIOVA
         {
 
         }
-        
+
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
-        
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -83,7 +85,7 @@ namespace AAAAmESTtKACIOVA
             List<string> setlogin = new List<string>();
             string connString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = mEST;";
             SqlConnection sqlConnection = new SqlConnection(connString);
-            
+
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("select login from [users]", sqlConnection);
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -91,7 +93,7 @@ namespace AAAAmESTtKACIOVA
             {
                 setlogin.Add(sqlDataReader.GetString(0));
             }
-            
+
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
@@ -102,8 +104,9 @@ namespace AAAAmESTtKACIOVA
         private void button4_Click_1(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
+            form2.UserId = false;
             form2.Show();
-           this.Hide();
+            this.Hide();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -115,5 +118,8 @@ namespace AAAAmESTtKACIOVA
         {
 
         }
+
+
+        
     }
 }
