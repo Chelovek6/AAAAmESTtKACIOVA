@@ -43,11 +43,13 @@ namespace AAAAmESTtKACIOVA
             {
                 toForm3Button.Visible = true;
                 deleteButton.Visible = true;
+                ChangeButton.Visible = true;
             }
             else
             {
                 toForm3Button.Visible = false;
                 deleteButton.Visible = false;
+                ChangeButton.Visible = false;
             }
 
             sqlConnection.Open();
@@ -135,6 +137,29 @@ namespace AAAAmESTtKACIOVA
                     MessageBox.Show("Ошибка удаления: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Пожалуйста, выберите товар для редактирования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            
+            string selectedItem = listBox1.SelectedItem.ToString();
+            int id = int.Parse(selectedItem.Split(':')[0]);
+            string name = selectedItem.Split(':')[1].Split('-')[0].Trim(); 
+            string pricePart = selectedItem.Split('-')[1].Trim();
+            decimal price = decimal.Parse(pricePart, System.Globalization.NumberStyles.Currency); 
+
+            
+            Form4 form4 = new Form4(id, name, price);
+            form4.ShowDialog();
+
+            
+            button2_Click(null, null);
         }
     }
 }

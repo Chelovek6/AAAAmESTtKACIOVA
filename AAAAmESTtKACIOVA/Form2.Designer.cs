@@ -34,6 +34,7 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.toForm3Button = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
+            this.ChangeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // backButton
@@ -100,11 +101,23 @@
             this.deleteButton.Visible = false;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
+            // ChangeButton
+            // 
+            this.ChangeButton.Location = new System.Drawing.Point(502, 385);
+            this.ChangeButton.Name = "ChangeButton";
+            this.ChangeButton.Size = new System.Drawing.Size(92, 23);
+            this.ChangeButton.TabIndex = 7;
+            this.ChangeButton.Text = "Изменить";
+            this.ChangeButton.UseVisualStyleBackColor = true;
+            this.ChangeButton.Visible = false;
+            this.ChangeButton.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ChangeButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.toForm3Button);
             this.Controls.Add(this.listBox1);
@@ -124,5 +137,6 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button toForm3Button;
         private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button ChangeButton;
     }
 }
