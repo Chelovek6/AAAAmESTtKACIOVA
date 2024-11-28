@@ -33,6 +33,7 @@
             this.sortButton = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.toForm3Button = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // backButton
@@ -88,11 +89,23 @@
             this.toForm3Button.Visible = false;
             this.toForm3Button.Click += new System.EventHandler(this.toForm3Button_Click);
             // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(363, 385);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.TabIndex = 6;
+            this.deleteButton.Text = "Удалить";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Visible = false;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.toForm3Button);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.sortButton);
@@ -110,5 +123,6 @@
         private System.Windows.Forms.Button sortButton;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button toForm3Button;
+        private System.Windows.Forms.Button deleteButton;
     }
 }

@@ -42,10 +42,12 @@ namespace AAAAmESTtKACIOVA
             if (UserId == true)
             {
                 toForm3Button.Visible = true;
+                deleteButton.Visible = true;
             }
             else
             {
                 toForm3Button.Visible = false;
+                deleteButton.Visible = false;
             }
 
             sqlConnection.Open();
@@ -54,10 +56,11 @@ namespace AAAAmESTtKACIOVA
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
             while (sqlDataReader.Read())
             {
+                int id = sqlDataReader.GetInt32(0);
                 string name = sqlDataReader.GetString(1); 
-                decimal price = sqlDataReader.GetDecimal(2); 
+                decimal price = sqlDataReader.GetDecimal(2);
 
-                listgoodss.Add($"{name} - {price:C}"); 
+                listgoodss.Add($"{id}: {name} - {price:C}");
             }
             listBox1.DataSource = listgoodss;
         }
@@ -78,10 +81,11 @@ namespace AAAAmESTtKACIOVA
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
             while (sqlDataReader.Read())
             {
+                int id = sqlDataReader.GetInt32(0);
                 string name = sqlDataReader.GetString(1);
                 decimal price = sqlDataReader.GetDecimal(2);
 
-                listgoodss.Add($"{name} - {price:C}");
+                listgoodss.Add($"{id}: {name} - {price:C}");
             }
             listBox1.DataSource = listgoodss;
         }
@@ -90,6 +94,47 @@ namespace AAAAmESTtKACIOVA
         {
             Form3 form3 = new Form3();
             form3.Show();
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Пожалуйста, выберите товар для удаления.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Извлечение ID товара из выделенного элемента
+            string selectedItem = listBox1.SelectedItem.ToString();
+            int id = int.Parse(selectedItem.Split(':')[0]); // Парсим ID из строки
+
+            string connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=mEST;";
+            using (SqlConnection sqlConnection = new SqlConnection(connString))
+            {
+                try
+                {
+                    sqlConnection.Open();
+                    string query = "DELETE FROM goodss WHERE id = @id";
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@id", id);
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Товар успешно удалён!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            button2_Click(null, null); // Обновляем список товаров
+                        }
+                        else
+                        {
+                            MessageBox.Show("Не удалось удалить товар.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка удаления: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
